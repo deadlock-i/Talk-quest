@@ -78,7 +78,7 @@ export default function Talk() {
     `${String(Math.floor(seconds / 60)).padStart(2, "0")}:${String(seconds % 60).padStart(2, "0")}`;
 
   return (
-    <div className="min-h-screen grid-bg relative overflow-x-hidden">
+    <div className="talk-page min-h-screen grid-bg relative overflow-x-hidden">
       <div
         className={`absolute inset-0 transition-all duration-1000 ${
           isEnglishPhase
@@ -170,7 +170,7 @@ export default function Talk() {
               <div className="text-[10px] font-body text-quest-muted uppercase tracking-widest mt-1">
                 {talkSession.isPaused ? t("talk.paused") : t("talk.remaining")}
               </div>
-              <div className="flex flex-wrap justify-center gap-x-3 gap-y-1 text-xs font-body text-quest-dim mt-2">
+              <div className="flex flex-col items-center gap-0.5 text-xs font-body text-quest-dim mt-2">
                 <span>{t("talk.zhElapsed")}：{formatElapsed(talkSession.zhSeconds)}</span>
                 <span>{t("talk.enElapsed")}：{formatElapsed(talkSession.enSeconds)}</span>
               </div>

@@ -332,6 +332,53 @@ input, textarea {
   background-size: 32px 32px, 32px 32px, auto;
 }
 
+/* Talk is a focused, timer-driven screen. Keep its controls and supporting copy
+   readable against the bright pixel-sky used by the rest of the app. */
+.talk-page {
+  /* Preserve the bright pixel-sky background; contrast is handled locally. */
+}
+
+.talk-page .glass,
+.talk-page .glass-strong {
+  background: rgba(38, 29, 53, .96);
+  border-color: rgba(255, 244, 223, .92);
+  box-shadow: 0 8px 0 rgba(11, 9, 16, .82), inset 0 0 0 1px rgba(145, 111, 173, .82);
+}
+
+.talk-page .text-quest-muted {
+  color: #d8cce8 !important;
+}
+
+.talk-page .text-quest-dim {
+  color: #f1e9fa !important;
+}
+
+.talk-page .text-quest-text {
+  text-shadow: 2px 2px 0 rgba(38, 55, 112, .72), 0 0 8px rgba(31, 69, 120, .35);
+}
+
+.talk-page .bg-quest-card\/40,
+.talk-page .bg-quest-card\/50 {
+  background-color: rgba(40, 30, 56, .9) !important;
+}
+
+.quest-back-button {
+  padding: 7px 14px;
+  border: 2px solid #fff4df;
+  border-radius: 999px;
+  background: #30243f !important;
+  color: #fff8f0 !important;
+  text-shadow: 1px 1px 0 rgba(32, 57, 124, .58);
+  box-shadow: 0 5px 0 #0b0910, inset 0 0 0 1px rgba(115, 85, 141, .82) !important;
+}
+
+.quest-secondary-button {
+  background: rgba(48, 36, 63, .88) !important;
+  border-color: rgba(255, 244, 223, .72) !important;
+  color: #fff8f0 !important;
+  text-shadow: 1px 1px 0 rgba(11, 9, 16, .7);
+}
+
 /* Keep hero copy readable when it sits directly on the bright sky. */
 .hero-subtitle {
   color: #fff8f0;

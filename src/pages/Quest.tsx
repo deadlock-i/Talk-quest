@@ -22,7 +22,7 @@ export default function Quest() {
   const shuffleDisabled = useCustomTopic && questCard.isCustom;
 
   return (
-    <div className="min-h-screen grid-bg relative overflow-hidden">
+    <div className="quest-page min-h-screen grid-bg relative overflow-hidden">
       <div className="absolute top-0 right-0 w-96 h-96 bg-quest-primary/8 rounded-full blur-3xl" />
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-quest-accent/8 rounded-full blur-3xl" />
 
@@ -42,7 +42,7 @@ export default function Quest() {
               resetAll();
               navigate("/");
             }}
-            className="sky-copy text-quest-dim hover:text-quest-text text-sm font-body transition-colors"
+            className="quest-back-button sky-copy text-quest-dim hover:text-quest-text text-sm font-body transition-colors"
           >
             {t("quest.back")}
           </button>
@@ -206,7 +206,7 @@ export default function Quest() {
               onClick={refreshQuest}
               disabled={isGenerating || shuffleDisabled}
               title={shuffleDisabled ? t("quest.shuffleDisabled") : undefined}
-              className="py-3 rounded-2xl font-body text-sm text-quest-dim hover:text-quest-accent border border-quest-border/60 hover:border-quest-accent/40 transition-all flex items-center justify-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed"
+              className="quest-secondary-button py-3 rounded-2xl font-body text-sm text-quest-dim hover:text-quest-accent border border-quest-border/60 hover:border-quest-accent/40 transition-all flex items-center justify-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed"
             >
               <RefreshCw className={`w-4 h-4 ${isGenerating ? "animate-spin" : ""}`} />
               {t("quest.shuffle")}
@@ -220,7 +220,7 @@ export default function Quest() {
                 resetAll();
                 navigate("/");
               }}
-              className="py-3 rounded-2xl font-body text-sm text-quest-dim hover:text-quest-sos border border-quest-border/60 hover:border-quest-sos/40 transition-all flex items-center justify-center gap-2"
+              className="quest-secondary-button py-3 rounded-2xl font-body text-sm text-quest-dim hover:text-quest-sos border border-quest-border/60 hover:border-quest-sos/40 transition-all flex items-center justify-center gap-2"
             >
               {t("quest.newSetup")}
             </motion.button>
