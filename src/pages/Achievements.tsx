@@ -67,7 +67,7 @@ export default function Achievements() {
             className="sky-copy flex items-center gap-2 text-quest-dim hover:text-quest-text text-sm font-body transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
-            <span>Home</span>
+            <span>{t("global.home")}</span>
           </button>
 
           <div className="flex items-center gap-2 px-4 py-1.5 rounded-full glass">
@@ -86,10 +86,10 @@ export default function Achievements() {
           className="text-center mb-8"
         >
           <h1 className="font-display text-4xl md:text-5xl font-black tracking-tight mb-2">
-            <span className="gradient-text">Achievements</span>
+            <span className="gradient-text">{t("achievements.title")}</span>
           </h1>
           <p className="sky-copy font-body text-quest-dim text-sm">
-            Level {levelInfo.level} Adventurer
+            {t("achievements.subtitle", { level: levelInfo.level })}
           </p>
         </motion.div>
 
@@ -153,7 +153,7 @@ export default function Achievements() {
               {streak}
             </div>
             <div className="text-[9px] font-body text-quest-muted uppercase tracking-wider">
-              Streak
+              {t("achievements.streak")}
             </div>
           </div>
           <div className="glass rounded-2xl p-4 text-center">
@@ -162,7 +162,7 @@ export default function Achievements() {
               {questCount}
             </div>
             <div className="text-[9px] font-body text-quest-muted uppercase tracking-wider">
-              Quests
+              {t("achievements.quests")}
             </div>
           </div>
           <div className="glass rounded-2xl p-4 text-center">
@@ -171,7 +171,7 @@ export default function Achievements() {
               {vocabCount}
             </div>
             <div className="text-[9px] font-body text-quest-muted uppercase tracking-wider">
-              Words
+              {t("achievements.words")}
             </div>
           </div>
         </motion.div>
@@ -187,7 +187,7 @@ export default function Achievements() {
             <div className="flex items-center gap-2 mb-4">
               <Trophy className="w-5 h-5 text-quest-gold" />
               <h2 className="font-display text-lg font-bold text-quest-text">
-                Unlocked
+                {t("achievements.unlocked")}
               </h2>
               <span className="ml-auto px-2 py-0.5 rounded-full bg-quest-gold/15 text-[10px] font-body font-bold text-quest-gold">
                 {unlockedAchievements.length}
@@ -208,10 +208,10 @@ export default function Achievements() {
                   </div>
                   <div className="min-w-0 flex-1">
                     <div className="font-display text-sm font-bold text-quest-text truncate">
-                      {achievement.name}
+                      {t(`achievement.${achievement.id}.name`) === `achievement.${achievement.id}.name` ? achievement.name : t(`achievement.${achievement.id}.name`)}
                     </div>
                     <div className="text-[11px] font-body text-quest-dim truncate">
-                      {achievement.description}
+                      {t(`achievement.${achievement.id}.desc`) === `achievement.${achievement.id}.desc` ? achievement.description : t(`achievement.${achievement.id}.desc`)}
                     </div>
                   </div>
                   {achievement.unlockedAt && (
@@ -237,7 +237,7 @@ export default function Achievements() {
             <div className="flex items-center gap-2 mb-4">
               <Lock className="w-5 h-5 text-quest-muted" />
               <h2 className="font-display text-lg font-bold text-quest-text">
-                Locked
+                {t("achievements.locked")}
               </h2>
               <span className="ml-auto px-2 py-0.5 rounded-full bg-quest-card/60 text-[10px] font-body font-bold text-quest-muted">
                 {lockedAchievements.length}
@@ -260,10 +260,10 @@ export default function Achievements() {
                     </div>
                     <div className="min-w-0 flex-1">
                       <div className="font-display text-sm font-bold text-quest-dim truncate">
-                        {achievement.name}
+                        {t(`achievement.${achievement.id}.name`) === `achievement.${achievement.id}.name` ? achievement.name : t(`achievement.${achievement.id}.name`)}
                       </div>
                       <div className="text-[11px] font-body text-quest-muted truncate mb-1">
-                        {achievement.description}
+                        {t(`achievement.${achievement.id}.desc`) === `achievement.${achievement.id}.desc` ? achievement.description : t(`achievement.${achievement.id}.desc`)}
                       </div>
                       {/* Progress bar */}
                       <div className="h-1.5 rounded-full bg-quest-card/60 overflow-hidden">

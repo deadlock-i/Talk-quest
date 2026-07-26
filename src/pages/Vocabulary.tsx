@@ -61,7 +61,7 @@ export default function Vocabulary() {
             className="sky-copy flex items-center gap-2 text-quest-dim hover:text-quest-text text-sm font-body transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
-            <span>Home</span>
+            <span>{t("global.home")}</span>
           </button>
 
           <div className="flex items-center gap-2 px-4 py-1.5 rounded-full glass">

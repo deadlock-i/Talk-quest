@@ -3,10 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Sparkles, Plus, X, ArrowRight, Gamepad2, Users, Zap,
-  BookOpen, Trophy, Flame, Star, ChevronRight, Crown,
+  BookOpen, Trophy, Flame, Star, Crown,
 } from "lucide-react";
 import { useStore, getLevelInfo } from "@/store/useStore";
 import PetPrototypeGallery from "@/components/PetPrototypeGallery";
+import { useT } from "@/i18n/translations";
 
 const suggestedInterests = [
   "Music", "Movies", "Travel", "Food", "Gaming",
@@ -17,6 +18,7 @@ const playerColors = ["#00e5ff", "#ff5ebc", "#ffd700", "#00e676", "#ff9500", "#b
 
 export default function Home() {
   const navigate = useNavigate();
+  const t = useT();
   const {
     interests, setInterests, generateQuest, isGenerating,
     player1, player2, setPlayer1, setPlayer2,
@@ -28,6 +30,11 @@ export default function Home() {
 
   const levelInfo = getLevelInfo(totalXP);
   const unlockedCount = achievements.filter((a) => a.unlockedAt).length;
+  const interestLabel = (value: string) => {
+    const key = `home.interest.${value.toLowerCase()}`;
+    const translated = t(key);
+    return translated === key ? value : translated;
+  };
 
   const addInterest = (value: string) => {
     const trimmed = value.trim();
@@ -114,8 +121,8 @@ export default function Home() {
                   <Flame className="w-5 h-5 text-white" />
                 </div>
                 <div>
-                  <div className="font-display text-lg font-black text-white">{streak} Day Streak!</div>
-                  <div className="text-xs font-body text-quest-dim">Keep the momentum going!</div>
+                  <div className="font-display text-lg font-black text-white">{t("home.streak", { count: streak })}</div>
+                  <div className="text-xs font-body text-quest-dim">{t("home.streakHint")}</div>
                 </div>
               </div>
               <div className="flex gap-1">
@@ -136,14 +143,14 @@ export default function Home() {
         >
           <div className="inline-flex items-center gap-2 mb-4 px-4 py-2 rounded-full glass border border-quest-primary/30">
             <Sparkles className="w-4 h-4 text-quest-primary" />
-            <span className="text-xs font-body tracking-wider text-quest-dim uppercase font-semibold">Quest Protocol v2.0</span>
+            <span className="text-xs font-body tracking-wider text-quest-dim uppercase font-semibold">{t("home.badge")}</span>
           </div>
           <h1 className="font-display text-5xl md:text-6xl font-black tracking-tight mb-3">
             <span className="gradient-text">Talk</span>
             <span className="text-white">Quest</span>
           </h1>
           <p className="hero-subtitle font-body text-base md:text-lg max-w-md mx-auto leading-relaxed">
-            Turn small talk into <span className="text-quest-primary neon-text font-bold">big quests</span>. A co-op language adventure for two.
+            {t("home.subtitle")} <span className="text-quest-primary neon-text font-bold">{t("home.subtitleHighlight")}</span>{t("home.subtitleTail")}
           </p>
         </motion.div>
 
@@ -162,15 +169,15 @@ export default function Home() {
                 <Users className="w-5 h-5 text-quest-purple" />
               </div>
               <div>
-                <h2 className="font-display text-lg font-bold text-white">Team Setup</h2>
-                <p className="text-xs text-quest-dim font-body">Customize your duo</p>
+                <h2 className="font-display text-lg font-bold text-white">{t("home.team.title")}</h2>
+                <p className="text-xs text-quest-dim font-body">{t("home.team.subtitle")}</p>
               </div>
             </div>
             <button
               onClick={() => setShowPlayerSetup(!showPlayerSetup)}
               className="chrome-button text-xs font-body text-quest-primary hover:text-white transition-colors"
             >
-              {showPlayerSetup ? "Done" : "Edit"}
+              {showPlayerSetup ? t("home.team.done") : t("home.team.edit")}
             </button>
           </div>
 
@@ -196,7 +203,7 @@ export default function Home() {
                       value={player1.name}
                       onChange={(e) => setPlayer1({ name: e.target.value })}
                       className="w-full px-3 py-2 rounded-lg bg-quest-bg/60 border border-quest-border text-sm text-white font-body focus:outline-none focus:border-quest-primary/60"
-                      placeholder="Name"
+                      placeholder={t("home.team.name")}
                     />
                     <div className="flex gap-1.5 flex-wrap">
                       {playerColors.map((c) => (
@@ -238,7 +245,7 @@ export default function Home() {
                       value={player2.name}
                       onChange={(e) => setPlayer2({ name: e.target.value })}
                       className="w-full px-3 py-2 rounded-lg bg-quest-bg/60 border border-quest-border text-sm text-white font-body focus:outline-none focus:border-quest-primary/60"
-                      placeholder="Name"
+                      placeholder={t("home.team.name")}
                     />
                     <div className="flex gap-1.5 flex-wrap">
                       {playerColors.map((c) => (
@@ -273,8 +280,8 @@ export default function Home() {
               <Star className="w-5 h-5 text-quest-primary" />
             </div>
             <div>
-              <h2 className="font-display text-lg font-bold text-white">Sync Your Interests</h2>
-              <p className="text-xs text-quest-dim font-body">Pick 1-5 shared topics to generate your quest</p>
+              <h2 className="font-display text-lg font-bold text-white">{t("home.interests.title")}</h2>
+              <p className="text-xs text-quest-dim font-body">{t("home.interests.subtitle")}</p>
             </div>
           </div>
 
@@ -289,7 +296,7 @@ export default function Home() {
                   exit={{ opacity: 0, scale: 0.8 }}
                   className="group flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-quest-primary/20 to-quest-purple/20 border border-quest-primary/40"
                 >
-                  <span className="text-sm font-body text-white font-semibold">{interest}</span>
+                  <span className="text-sm font-body text-white font-semibold">{interestLabel(interest)}</span>
                   <button onClick={() => removeInterest(interest)} className="chrome-button opacity-60 hover:opacity-100 transition-opacity">
                     <X className="w-3.5 h-3.5 text-quest-primary" />
                   </button>
@@ -310,7 +317,7 @@ export default function Home() {
                   addInterest(input);
                 }
               }}
-              placeholder="Type an interest and press Enter..."
+              placeholder={t("home.interests.placeholder")}
               className="flex-1 px-4 py-3 rounded-xl bg-quest-bg/60 border border-quest-border text-white font-body placeholder-quest-muted/50 focus:outline-none focus:border-quest-primary/60 focus:ring-2 focus:ring-quest-primary/20 transition-all text-sm"
               disabled={interests.length >= 5}
             />
@@ -335,7 +342,7 @@ export default function Home() {
                   disabled={interests.length >= 5}
                   className="px-3 py-1.5 rounded-lg bg-quest-card/60 border border-quest-border/60 text-xs font-body text-quest-dim hover:text-white hover:border-quest-primary/40 transition-all disabled:opacity-30"
                 >
-                  + {suggestion}
+                  + {interestLabel(suggestion)}
                 </button>
               ))}
           </div>
@@ -360,12 +367,12 @@ export default function Home() {
                 <motion.div animate={{ rotate: 360 }} transition={{ duration: 1, repeat: Infinity, ease: "linear" }}>
                   <Sparkles className="w-5 h-5" />
                 </motion.div>
-                Generating Your Quest...
+                {t("home.generating")}
               </>
             ) : (
               <>
                 <Gamepad2 className="w-5 h-5" />
-                Generate Quest Card
+                {t("home.generate")}
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </>
             )}
@@ -380,9 +387,9 @@ export default function Home() {
           className="mt-8 grid grid-cols-3 gap-3"
         >
           {[
-            { icon: Gamepad2, label: "Quest Card", desc: "AI topics + 7 words", color: "text-quest-primary" },
-            { icon: Zap, label: "50/50 Timer", desc: "Fair language split", color: "text-quest-purple" },
-            { icon: BookOpen, label: "Word Bank", desc: `${vocabulary.length} words learned`, color: "text-quest-pink" },
+            { icon: Gamepad2, label: t("home.feature.quest"), desc: t("home.feature.questDesc"), color: "text-quest-primary" },
+            { icon: Zap, label: t("home.feature.timer"), desc: t("home.feature.timerDesc"), color: "text-quest-purple" },
+            { icon: BookOpen, label: t("home.feature.vocab"), desc: t("home.feature.vocabDesc", { count: vocabulary.length }), color: "text-quest-pink" },
           ].map((feature) => (
             <div key={feature.label} className="glass rounded-2xl p-4 text-center card-hover">
               <feature.icon className={`w-5 h-5 ${feature.color} mx-auto mb-2`} />
@@ -401,21 +408,21 @@ export default function Home() {
         >
           <div className="flex items-center gap-1.5">
             <Zap className="w-3.5 h-3.5 text-quest-primary" />
-            <span>{totalXP} XP Total</span>
+            <span>{t("home.stats.xp", { count: totalXP })}</span>
           </div>
           <div className="flex items-center gap-1.5">
             <BookOpen className="w-3.5 h-3.5 text-quest-pink" />
-            <span>{vocabulary.length} Words</span>
+            <span>{t("home.stats.words", { count: vocabulary.length })}</span>
           </div>
           <div className="flex items-center gap-1.5">
             <Trophy className="w-3.5 h-3.5 text-quest-gold" />
-            <span>{unlockedCount} Badges</span>
+            <span>{t("home.stats.badges", { count: unlockedCount })}</span>
           </div>
         </motion.div>
 
         <div className="flex-1" />
         <p className="sky-copy text-center text-xs text-quest-muted font-body mt-6">
-          Co-op Language Exchange · Empower Social, Don't Replace It
+          {t("home.footer")}
         </p>
       </div>
     </div>

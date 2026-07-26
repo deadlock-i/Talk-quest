@@ -46,6 +46,7 @@ function PlayerCard({
   onChangeColor: (color: string) => void;
   delay: number;
 }) {
+  const t = useT();
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -66,7 +67,7 @@ function PlayerCard({
             {label}
           </h2>
           <p className="text-xs text-quest-dim font-body">
-            {player.name || "Unnamed"}
+            {player.name || t("team.unnamed")}
           </p>
         </div>
       </div>
@@ -74,7 +75,7 @@ function PlayerCard({
       {/* Name input */}
       <div className="mb-4">
         <label className="text-[10px] font-body text-quest-muted uppercase tracking-wider mb-2 block">
-          Name
+          {t("team.name")}
         </label>
         <input
           type="text"
@@ -90,7 +91,7 @@ function PlayerCard({
       <div>
         <label className="text-[10px] font-body text-quest-muted uppercase tracking-wider mb-2 block flex items-center gap-1">
           <Palette className="w-3 h-3" />
-          Color
+          {t("team.color")}
         </label>
         <div className="flex flex-wrap gap-2.5">
           {PLAYER_COLORS.map((color) => (
@@ -171,13 +172,13 @@ export default function TeamSetup() {
             className="sky-copy flex items-center gap-2 text-quest-dim hover:text-quest-text text-sm font-body transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
-            <span>Home</span>
+            <span>{t("global.home")}</span>
           </button>
 
           <div className="flex items-center gap-2 px-4 py-1.5 rounded-full glass">
             <Users className="w-4 h-4 text-quest-accent" />
             <span className="text-xs font-body tracking-wider text-quest-dim uppercase">
-              Team Setup
+              {t("team.title")}
             </span>
           </div>
         </motion.div>
@@ -190,10 +191,10 @@ export default function TeamSetup() {
           className="text-center mb-8"
         >
           <h1 className="font-display text-4xl md:text-5xl font-black tracking-tight mb-2">
-            <span className="gradient-text">Team Setup</span>
+            <span className="gradient-text">{t("team.title")}</span>
           </h1>
           <p className="sky-copy font-body text-quest-dim text-sm">
-            Configure your adventure duo
+            {t("team.subtitle")}
           </p>
         </motion.div>
 
@@ -212,11 +213,11 @@ export default function TeamSetup() {
               <User className="w-8 h-8" style={{ color: player1.color }} />
             </div>
             <span className="text-xs font-body text-quest-dim max-w-[80px] truncate">
-              {player1.name || "Player 1"}
+              {player1.name || t("team.player1")}
             </span>
           </div>
 
-          <div className="text-quest-muted font-display text-lg">vs</div>
+          <div className="text-quest-muted font-display text-lg">{t("team.vs")}</div>
 
           <div className="flex flex-col items-center gap-2">
             <div
@@ -226,14 +227,14 @@ export default function TeamSetup() {
               <User className="w-8 h-8" style={{ color: player2.color }} />
             </div>
             <span className="text-xs font-body text-quest-dim max-w-[80px] truncate">
-              {player2.name || "Player 2"}
+              {player2.name || t("team.player2")}
             </span>
           </div>
         </motion.div>
 
         {/* Player 1 */}
         <PlayerCard
-          label="Player 1"
+          label={t("team.player1")}
           player={player1}
           onChangeName={(name) => setLocalPlayer1({ ...player1, name })}
           onChangeColor={(color) => setLocalPlayer1({ ...player1, color })}
@@ -242,7 +243,7 @@ export default function TeamSetup() {
 
         {/* Player 2 */}
         <PlayerCard
-          label="Player 2"
+          label={t("team.player2")}
           player={player2}
           onChangeName={(name) => setLocalPlayer2({ ...player2, name })}
           onChangeColor={(color) => setLocalPlayer2({ ...player2, color })}
@@ -266,7 +267,7 @@ export default function TeamSetup() {
             <div className="absolute inset-0 bg-gradient-to-r from-quest-primary via-quest-primaryLight to-quest-accent bg-[length:200%_100%] group-hover:animate-shimmer" />
             <span className="relative flex items-center justify-center gap-3 text-quest-bg">
               <Save className="w-5 h-5" />
-              Save &amp; Start
+              {t("team.save")}
             </span>
           </motion.button>
         </motion.div>
