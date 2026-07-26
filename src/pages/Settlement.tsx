@@ -33,9 +33,9 @@ export default function Settlement() {
 
   // Animate XP counting up
   useEffect(() => {
-    const target = 50;
+    const target = latestReview?.xp ?? 0;
     const duration = 1500;
-    const steps = 50;
+    const steps = Math.max(1, Math.min(50, target));
     const increment = target / steps;
     let current = 0;
     const interval = setInterval(() => {
@@ -49,7 +49,7 @@ export default function Settlement() {
       }
     }, duration / steps);
     return () => clearInterval(interval);
-  }, []);
+  }, [latestReview]);
 
   if (!isSettled || !latestReview) {
     return <Navigate to="/" replace />;

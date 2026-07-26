@@ -607,30 +607,38 @@ function buildCustomQuest(topic: string, questions: string[], interests: string[
   };
 }
 
-// Pet helpers
-export const PET_XP_PER_LEVEL = 100;
+// Shared user and pet growth thresholds (cumulative XP).
+export const LEVEL_XP_THRESHOLDS = [0, 100, 400, 900, 1600] as const;
+export const XP_PER_STUDY_MINUTE = 1;
+export const FULL_LEVEL_TARGET_DAYS = 30;
+export const DAILY_XP_TARGET = Math.ceil(LEVEL_XP_THRESHOLDS[LEVEL_XP_THRESHOLDS.length - 1] / FULL_LEVEL_TARGET_DAYS);
+
+function getLevelFromXP(xp: number): number {
+  for (let index = LEVEL_XP_THRESHOLDS.length - 1; index >= 0; index--) {
+    if (xp >= LEVEL_XP_THRESHOLDS[index]) return index + 1;
+  }
+  return 1;
+}
 
 export function getPetLevel(xp: number): number {
-  return Math.floor(xp / PET_XP_PER_LEVEL) + 1;
+  return getLevelFromXP(xp);
 }
 
 export function getPetStage(level: number): number {
-  if (level <= 2) return 0;
-  if (level <= 4) return 1;
-  if (level <= 6) return 2;
-  if (level <= 9) return 3;
+  if (level <= 1) return 0;
+  if (level === 2) return 1;
+  if (level === 3) return 2;
+  if (level === 4) return 3;
   return 4;
 }
 
 export function getPetProgress(xp: number): number {
-  return (xp % PET_XP_PER_LEVEL) / PET_XP_PER_LEVEL;
+  return getLevelInfo(xp).progress;
 }
 
 // Player level helpers
-const PLAYER_XP_PER_LEVEL = 150;
-
 function getPlayerLevel(xp: number): number {
-  return Math.floor(xp / PLAYER_XP_PER_LEVEL) + 1;
+  return getLevelFromXP(xp);
 }
 
 // Helper: get today's date as YYYY-MM-DD string
@@ -819,12 +827,12 @@ export const useStore = create<AppState>()(
       settleTalk: () => {
         const state = get();
         const ts = state.talkSession;
-        const xpGained = 50;
+        const durationMinutes = Math.max(1, Math.floor(ts.elapsedSeconds / 60));
+        const xpGained = durationMinutes * XP_PER_STUDY_MINUTE;
 
         // --- Pet XP ---
         const newPetXp = state.pet.xp + xpGained;
         const petLevelAfter = getPetLevel(newPetXp);
-        const durationMinutes = Math.max(1, Math.floor(ts.elapsedSeconds / 60));
 
         // --- Total XP & Level ---
         const newTotalXP = state.totalXP + xpGained;
@@ -1113,7 +1121,7 @@ export const useStore = create<AppState>()(
         if (typeof rawState.streak !== "number") rawState.streak = 0;
         if (!rawState.lastQuestDate) rawState.lastQuestDate = null;
         if (typeof rawState.totalXP !== "number") rawState.totalXP = 0;
-        if (typeof rawState.level !== "number") rawState.level = 1;
+        rawState.level = computeLevelFromXP(rawState.totalXP as number);
         if (!rawState.achievements) rawState.achievements = createDefaultAchievements();
         if (!rawState.questHistory) rawState.questHistory = [];
 
@@ -1173,7 +1181,13 @@ export function getLevelInfo(totalXP: number): {
   nextLevelXP: number;
   progress: number;
 } {
-  const level = Math.floor(totalXP / 150) + 1;
-  const currentXP = totalXP % 150;
-  return { level, currentXP, levelXP: 150, nextLevelXP: 150, progress: currentXP / 150 };
+  const level = getLevelFromXP(totalXP);
+  const maxXP = LEVEL_XP_THRESHOLDS[LEVEL_XP_THRESHOLDS.length - 1];
+  if (level >= LEVEL_XP_THRESHOLDS.length) {
+    return { level, currentXP: Math.min(totalXP, maxXP), levelXP: maxXP, nextLevelXP: maxXP, progress: 1 };
+  }
+  const levelStartXP = LEVEL_XP_THRESHOLDS[level - 1];
+  const nextLevelXP = LEVEL_XP_THRESHOLDS[level];
+  const progress = (totalXP - levelStartXP) / (nextLevelXP - levelStartXP);
+  return { level, currentXP: totalXP, levelXP: nextLevelXP, nextLevelXP, progress };
 }

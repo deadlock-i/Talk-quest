@@ -26,7 +26,6 @@ export default function Achievements() {
 
   /* Read state from the store */
   const totalXP = useStore((s) => s.totalXP);
-  const level = useStore((s) => s.level);
   const streak = useStore((s) => s.streak);
   const questHistory = useStore((s) => s.questHistory);
   const vocabulary = useStore((s) => s.vocabulary);
@@ -90,7 +89,7 @@ export default function Achievements() {
             <span className="gradient-text">Achievements</span>
           </h1>
           <p className="font-body text-quest-dim text-sm">
-            Level {level} Adventurer
+            Level {levelInfo.level} Adventurer
           </p>
         </motion.div>
 

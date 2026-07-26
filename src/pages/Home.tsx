@@ -6,6 +6,7 @@ import {
   BookOpen, Trophy, Flame, Star, ChevronRight, Crown,
 } from "lucide-react";
 import { useStore, getLevelInfo } from "@/store/useStore";
+import PetPrototypeGallery from "@/components/PetPrototypeGallery";
 
 const suggestedInterests = [
   "Music", "Movies", "Travel", "Food", "Gaming",
@@ -19,7 +20,7 @@ export default function Home() {
   const {
     interests, setInterests, generateQuest, isGenerating,
     player1, player2, setPlayer1, setPlayer2,
-    streak, totalXP, level, vocabulary, achievements,
+    streak, totalXP, vocabulary, achievements,
   } = useStore();
 
   const [input, setInput] = useState("");
@@ -66,11 +67,11 @@ export default function Home() {
                 <Crown className="w-6 h-6 text-white" />
               </div>
               <div className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-quest-gold flex items-center justify-center text-[10px] font-display font-black text-quest-bg">
-                {level}
+                {levelInfo.level}
               </div>
             </div>
             <div>
-              <div className="font-display text-sm font-bold text-white">Lv.{level}</div>
+              <div className="font-display text-sm font-bold text-white">Lv.{levelInfo.level}</div>
               <div className="w-24 h-2 rounded-full bg-quest-surface overflow-hidden">
                 <motion.div
                   className="h-full rounded-full bg-gradient-to-r from-quest-primary to-quest-purple"
@@ -145,6 +146,8 @@ export default function Home() {
             Turn small talk into <span className="text-quest-primary neon-text font-bold">big quests</span>. A co-op language adventure for two.
           </p>
         </motion.div>
+
+        <PetPrototypeGallery />
 
         {/* Player Setup Card */}
         <motion.div
