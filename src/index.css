@@ -67,6 +67,20 @@ button:active:not(:disabled) {
   box-shadow: 0 2px 0 #09070d;
 }
 
+/* Quiet text/icon actions should not look like primary arcade buttons. */
+button.chrome-button {
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+button.chrome-button:hover:not(:disabled),
+button.chrome-button:active:not(:disabled) {
+  transform: none !important;
+  box-shadow: none !important;
+}
+
 input, textarea {
   border-width: 2px !important;
   border-color: #73558d !important;
@@ -316,6 +330,17 @@ input, textarea {
     linear-gradient(90deg, rgba(30,90,180,.06) 2px, transparent 2px),
     radial-gradient(circle at 50% 8%, rgba(255,255,255,.24), transparent 34%);
   background-size: 32px 32px, 32px 32px, auto;
+}
+
+/* Keep hero copy readable when it sits directly on the bright sky. */
+.hero-subtitle {
+  color: #fff8f0;
+  text-shadow: 2px 2px 0 rgba(42, 67, 139, .52), 0 0 12px rgba(33, 71, 151, .25);
+}
+
+.hero-subtitle .text-quest-primary {
+  color: #075f83;
+  text-shadow: 1px 1px 0 rgba(255, 255, 255, .62), 2px 2px 0 rgba(28, 73, 137, .4);
 }
 
 .pet-prototype-card {

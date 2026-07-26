@@ -142,7 +142,7 @@ export default function Home() {
             <span className="gradient-text">Talk</span>
             <span className="text-white">Quest</span>
           </h1>
-          <p className="font-body text-quest-dim text-base md:text-lg max-w-md mx-auto leading-relaxed">
+          <p className="hero-subtitle font-body text-base md:text-lg max-w-md mx-auto leading-relaxed">
             Turn small talk into <span className="text-quest-primary neon-text font-bold">big quests</span>. A co-op language adventure for two.
           </p>
         </motion.div>
@@ -168,7 +168,7 @@ export default function Home() {
             </div>
             <button
               onClick={() => setShowPlayerSetup(!showPlayerSetup)}
-              className="text-xs font-body text-quest-primary hover:text-white transition-colors"
+              className="chrome-button text-xs font-body text-quest-primary hover:text-white transition-colors"
             >
               {showPlayerSetup ? "Done" : "Edit"}
             </button>
@@ -290,7 +290,7 @@ export default function Home() {
                   className="group flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-quest-primary/20 to-quest-purple/20 border border-quest-primary/40"
                 >
                   <span className="text-sm font-body text-white font-semibold">{interest}</span>
-                  <button onClick={() => removeInterest(interest)} className="opacity-60 hover:opacity-100 transition-opacity">
+                  <button onClick={() => removeInterest(interest)} className="chrome-button opacity-60 hover:opacity-100 transition-opacity">
                     <X className="w-3.5 h-3.5 text-quest-primary" />
                   </button>
                 </motion.div>
