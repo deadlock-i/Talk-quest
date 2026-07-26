@@ -117,7 +117,7 @@ export default function Settlement() {
           <h1 className="font-display text-5xl font-black mb-2">
             <span className="gradient-text">{t("settle.victory")}</span>
           </h1>
-          <p className="font-body text-quest-dim text-sm">{t("settle.victoryDesc")}</p>
+          <p className="sky-copy font-body text-quest-dim text-sm">{t("settle.victoryDesc")}</p>
         </motion.div>
 
         {/* XP + Badge */}
@@ -335,7 +335,7 @@ export default function Settlement() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1 }}
-          className="text-center text-xs text-quest-muted font-body mt-8 flex items-center justify-center gap-1.5"
+          className="sky-copy text-center text-xs text-quest-muted font-body mt-8 flex items-center justify-center gap-1.5"
         >
           {t("settle.footer")} <Heart className="w-3 h-3 text-quest-sos fill-quest-sos" /> {t("settle.footerTail")}
         </motion.p>

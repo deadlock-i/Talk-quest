@@ -42,7 +42,7 @@ export default function Quest() {
               resetAll();
               navigate("/");
             }}
-            className="text-quest-dim hover:text-quest-text text-sm font-body transition-colors"
+            className="sky-copy text-quest-dim hover:text-quest-text text-sm font-body transition-colors"
           >
             {t("quest.back")}
           </button>
@@ -228,7 +228,7 @@ export default function Quest() {
         </div>
 
         <div className="flex-1" />
-        <p className="text-center text-xs text-quest-muted font-body mt-8">
+        <p className="sky-copy text-center text-xs text-quest-muted font-body mt-8">
           {shuffleDisabled ? t("quest.shuffleDisabled") : t("quest.shuffleHint")}
         </p>
       </div>

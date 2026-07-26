@@ -343,6 +343,16 @@ input, textarea {
   text-shadow: 1px 1px 0 rgba(255, 255, 255, .62), 2px 2px 0 rgba(28, 73, 137, .4);
 }
 
+/* Shared treatment for copy that sits outside the dark content cards. */
+.sky-copy {
+  color: #fff8f0 !important;
+  text-shadow: 1px 1px 0 rgba(42, 67, 139, .48), 0 0 8px rgba(33, 71, 151, .22);
+}
+
+.sky-copy:hover {
+  color: #ffffff !important;
+}
+
 .pet-prototype-card {
   background: linear-gradient(145deg, rgba(67, 45, 91, .96), rgba(43, 34, 61, .96));
 }
@@ -445,6 +455,7 @@ input, textarea {
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+  filter: drop-shadow(2px 2px 0 rgba(32, 57, 124, .48));
 }
 
 .gradient-orange {

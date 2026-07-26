@@ -397,7 +397,7 @@ export default function Home() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.8 }}
-          className="mt-6 flex items-center justify-center gap-6 text-xs font-body text-quest-dim"
+          className="sky-copy mt-6 flex items-center justify-center gap-6 text-xs font-body text-quest-dim"
         >
           <div className="flex items-center gap-1.5">
             <Zap className="w-3.5 h-3.5 text-quest-primary" />
@@ -414,7 +414,7 @@ export default function Home() {
         </motion.div>
 
         <div className="flex-1" />
-        <p className="text-center text-xs text-quest-muted font-body mt-6">
+        <p className="sky-copy text-center text-xs text-quest-muted font-body mt-6">
           Co-op Language Exchange · Empower Social, Don't Replace It
         </p>
       </div>

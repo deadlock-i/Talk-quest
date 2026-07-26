@@ -64,7 +64,7 @@ export default function Achievements() {
         >
           <button
             onClick={() => navigate("/")}
-            className="flex items-center gap-2 text-quest-dim hover:text-quest-text text-sm font-body transition-colors"
+            className="sky-copy flex items-center gap-2 text-quest-dim hover:text-quest-text text-sm font-body transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
             <span>Home</span>
@@ -88,7 +88,7 @@ export default function Achievements() {
           <h1 className="font-display text-4xl md:text-5xl font-black tracking-tight mb-2">
             <span className="gradient-text">Achievements</span>
           </h1>
-          <p className="font-body text-quest-dim text-sm">
+          <p className="sky-copy font-body text-quest-dim text-sm">
             Level {levelInfo.level} Adventurer
           </p>
         </motion.div>
