@@ -23,11 +23,11 @@
 body {
   margin: 0;
   min-height: 100vh;
-  background-color: #17131f;
+  background-color: #5c94fc;
   background-image:
-    linear-gradient(rgba(255,255,255,0.035) 2px, transparent 2px),
-    linear-gradient(90deg, rgba(255,255,255,0.035) 2px, transparent 2px),
-    linear-gradient(135deg, #17131f 0 50%, #1e1728 50% 100%);
+    linear-gradient(rgba(255,255,255,.08) 2px, transparent 2px),
+    linear-gradient(90deg, rgba(255,255,255,.08) 2px, transparent 2px),
+    linear-gradient(#5c94fc 0%, #6ca4ff 58%, #92c9ff 100%);
   background-size: 32px 32px, 32px 32px, 100% 100%;
   background-attachment: fixed;
   overflow-x: hidden;
@@ -37,7 +37,7 @@ button, input, textarea {
   font-family: inherit;
 }
 
-/* Pixel-game treatment: crisp edges and stepped, arcade-style shadows. */
+/* Arcade colors with softer, friendlier card and control shapes. */
 button, input, textarea, .glass, .glass-strong {
   image-rendering: pixelated;
 }
@@ -46,39 +46,32 @@ button, input, textarea, .glass, .glass-strong {
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
   background: #30243f;
-  border: 3px solid #fff4df;
-  outline: 3px solid #17131f;
-  box-shadow: 7px 7px 0 #0b0910, inset 0 0 0 2px #73558d;
-  clip-path: polygon(8px 0, calc(100% - 8px) 0, calc(100% - 8px) 4px, 100% 4px, 100% calc(100% - 8px), calc(100% - 4px) calc(100% - 8px), calc(100% - 4px) 100%, 8px 100%, 8px calc(100% - 4px), 0 calc(100% - 4px), 0 8px, 8px 8px);
-}
-
-/* Keep cards and controls intentionally blocky rather than soft/glassy. */
-[class*="rounded-"] {
-  border-radius: 2px !important;
+  border: 2px solid rgba(255, 244, 223, .82);
+  box-shadow: 0 10px 0 rgba(11, 9, 16, .78), inset 0 0 0 1px rgba(115, 85, 141, .72);
 }
 
 button {
   border-width: 2px !important;
-  box-shadow: 4px 4px 0 #09070d;
+  box-shadow: 0 5px 0 #09070d;
   transition: transform 90ms steps(2, end), box-shadow 90ms steps(2, end), filter 90ms linear !important;
 }
 
 button:hover:not(:disabled) {
-  transform: translate(-2px, -2px) !important;
-  box-shadow: 7px 7px 0 #09070d;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 7px 0 #09070d;
   filter: saturate(1.25) brightness(1.08);
 }
 
 button:active:not(:disabled) {
-  transform: translate(3px, 3px) !important;
-  box-shadow: 1px 1px 0 #09070d;
+  transform: translateY(3px) !important;
+  box-shadow: 0 2px 0 #09070d;
 }
 
 input, textarea {
-  border-width: 3px !important;
+  border-width: 2px !important;
   border-color: #73558d !important;
   background: #17131f !important;
-  box-shadow: inset 4px 4px 0 #0b0910;
+  box-shadow: inset 0 3px 0 rgba(11, 9, 16, .75);
 }
 
 /* Full-site 8-bit scene dressing */
@@ -105,16 +98,119 @@ input, textarea {
 
 .pixel-cloud {
   position: fixed;
-  width: 72px;
-  height: 18px;
-  background: #fff4df;
-  box-shadow: 16px -16px 0 #fff4df, 36px -8px 0 #fff4df, 8px 8px 0 #2ed8e6, 28px 8px 0 #ff8c32;
-  opacity: .16;
+  width: 92px;
+  height: 22px;
+  background: #fff;
+  box-shadow: 18px -18px 0 #fff, 42px -10px 0 #fff, 68px 0 0 #fff, 10px 8px 0 #d9efff, 42px 8px 0 #d9efff;
+  filter: drop-shadow(0 5px 0 rgba(45, 105, 190, .3));
+  opacity: .92;
   animation: pixelCloudMove 16s steps(16, end) infinite alternate;
 }
 
-.pixel-cloud-left { top: 110px; left: 5vw; }
-.pixel-cloud-right { top: 210px; right: 10vw; transform: scale(.75); animation-delay: -7s; }
+.pixel-cloud-left { top: 120px; left: 5vw; }
+.pixel-cloud-right { top: 245px; right: 11vw; transform: scale(.78); animation-delay: -7s; }
+
+.pixel-sun {
+  position: fixed;
+  top: 54px;
+  right: 7vw;
+  width: 58px;
+  height: 58px;
+  background: #ffd83d;
+  border: 7px solid #fff07a;
+  box-shadow: 8px 0 #ffd83d, -8px 0 #ffd83d, 0 8px #ffd83d, 0 -8px #ffd83d, 0 0 0 5px rgba(255, 140, 50, .28);
+}
+
+.pixel-hill {
+  position: fixed;
+  bottom: 28px;
+  width: 220px;
+  height: 150px;
+  background: #79d34c;
+  border: 6px solid #2f943c;
+  border-bottom: 0;
+  border-radius: 50% 50% 0 0;
+  box-shadow: inset -16px 0 rgba(43, 139, 57, .24);
+}
+
+.pixel-hill span {
+  position: absolute;
+  width: 12px;
+  height: 24px;
+  top: 46px;
+  left: 62px;
+  background: #2f943c;
+  border-radius: 9px;
+}
+
+.pixel-hill span:nth-child(2) { left: 108px; top: 26px; }
+.pixel-hill span:nth-child(3) { left: 154px; top: 72px; }
+.pixel-hill-left { left: -52px; }
+.pixel-hill-right { right: -70px; width: 260px; height: 185px; background: #65c746; }
+
+.pixel-bush {
+  position: fixed;
+  bottom: 29px;
+  width: 96px;
+  height: 42px;
+  background: #39b83f;
+  border: 5px solid #168936;
+  border-bottom: 0;
+  border-radius: 48px 48px 0 0;
+  box-shadow: 32px -22px 0 #39b83f, 64px 0 0 #39b83f;
+}
+
+.pixel-bush-left { left: 20vw; }
+.pixel-bush-right { right: 23vw; transform: scale(.8); }
+
+.pixel-bricks {
+  position: fixed;
+  top: 36%;
+  left: 4vw;
+  display: flex;
+  gap: 5px;
+}
+
+.pixel-bricks i {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  background: #d86b28;
+  border: 4px solid #7b351b;
+  box-shadow: inset 4px 4px 0 #f2a04b, 4px 4px 0 rgba(25, 56, 111, .28);
+  color: #fff;
+  font: 900 25px/1 monospace;
+  font-style: normal;
+}
+
+.pixel-bricks .pixel-question-block {
+  background: #f4a629;
+  border-color: #9d571d;
+  box-shadow: inset 4px 4px 0 #ffd75a, 4px 4px 0 rgba(25, 56, 111, .28);
+}
+
+.pixel-pipe {
+  position: fixed;
+  right: 5vw;
+  bottom: 28px;
+  width: 68px;
+  height: 92px;
+  background: #25a936;
+  border: 6px solid #116b2b;
+  box-shadow: inset 10px 0 #66df4e, inset -9px 0 #168634;
+}
+
+.pixel-pipe span {
+  position: absolute;
+  width: 88px;
+  height: 30px;
+  left: -16px;
+  top: -6px;
+  background: #31ba3e;
+  border: 6px solid #116b2b;
+  box-shadow: inset 12px 0 #72e55a, inset -10px 0 #168634;
+}
 
 .pixel-spark {
   position: fixed;
@@ -135,18 +231,98 @@ input, textarea {
   bottom: 0;
   height: 28px;
   background:
-    linear-gradient(90deg, transparent 0 12px, #95e052 12px 24px, transparent 24px 36px) 0 0/36px 8px repeat-x,
-    linear-gradient(#79d34c 0 9px, #3d8d3e 9px 17px, #80512f 17px 100%);
-  box-shadow: 0 -5px 0 #b5ef69, 0 -9px 0 #17131f;
-  opacity: .72;
+    linear-gradient(90deg, transparent 0 12px, #a8e85c 12px 24px, transparent 24px 36px) 0 0/36px 8px repeat-x,
+    repeating-linear-gradient(90deg, #a95724 0 28px, #8b3d1e 28px 32px, #c66a2e 32px 60px, #8b3d1e 60px 64px);
+  box-shadow: 0 -6px 0 #8bd448, 0 -11px 0 #287f36;
+  opacity: 1;
+}
+
+/* Arcade collectibles fill the desktop gutters without competing with content. */
+.pixel-side-decor {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.pixel-sticker-column {
+  position: absolute;
+  top: 92px;
+  bottom: 52px;
+  width: clamp(108px, 13vw, 190px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.pixel-sticker-column-left { left: clamp(12px, 2.5vw, 52px); }
+.pixel-sticker-column-right { right: clamp(12px, 2.5vw, 52px); }
+
+.pixel-sticker {
+  position: relative;
+  width: clamp(58px, 5.5vw, 82px);
+  height: clamp(58px, 5.5vw, 82px);
+  padding: 7px;
+  background: rgba(48, 36, 63, .82);
+  border: 3px solid #fff4df;
+  outline: 3px solid #17131f;
+  box-shadow: 7px 7px 0 #0b0910, inset 0 0 0 3px #73558d;
+  clip-path: polygon(8px 0, calc(100% - 8px) 0, calc(100% - 8px) 4px, 100% 4px, 100% calc(100% - 8px), calc(100% - 4px) calc(100% - 8px), calc(100% - 4px) 100%, 8px 100%, 8px calc(100% - 4px), 0 calc(100% - 4px), 0 8px, 8px 8px);
+  animation: pixelStickerFloat 4s steps(4, end) infinite;
+}
+
+.pixel-sticker::after {
+  content: "";
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  right: -13px;
+  top: -10px;
+  background: #ffd83d;
+  box-shadow: 5px 0 #ffd83d, -5px 0 #ffd83d, 0 5px #ffd83d, 0 -5px #ffd83d;
+  animation: pixelBlink 1.5s steps(2, end) infinite;
+}
+
+.pixel-sticker svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  filter: drop-shadow(4px 4px 0 #0b0910);
+}
+
+.pixel-sticker-2 { animation-delay: -.8s; transform: rotate(2deg); }
+.pixel-sticker-3 { animation-delay: -1.6s; transform: rotate(-2deg); }
+.pixel-sticker-4 { animation-delay: -2.4s; }
+.pixel-sticker-column-right .pixel-sticker::after { right: auto; left: -13px; }
+
+@keyframes pixelStickerFloat {
+  0%, 100% { margin-top: 0; }
+  50% { margin-top: -10px; }
+}
+
+@media (max-width: 1099px) {
+  .pixel-side-decor { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pixel-sticker, .pixel-sticker::after { animation: none; }
 }
 
 .grid-bg {
   background-image:
-    linear-gradient(rgba(46,216,230,.06) 2px, transparent 2px),
-    linear-gradient(90deg, rgba(255,140,50,.05) 2px, transparent 2px),
-    radial-gradient(circle at 50% 10%, rgba(166,109,232,.15), transparent 36%);
+    linear-gradient(rgba(255,255,255,.07) 2px, transparent 2px),
+    linear-gradient(90deg, rgba(30,90,180,.06) 2px, transparent 2px),
+    radial-gradient(circle at 50% 8%, rgba(255,255,255,.24), transparent 34%);
   background-size: 32px 32px, 32px 32px, auto;
+}
+
+@media (max-width: 760px) {
+  .pixel-bricks, .pixel-pipe { display: none; }
+  .pixel-hill { opacity: .72; transform: scale(.72); transform-origin: bottom; }
+  .pixel-bush { opacity: .7; }
+  .pixel-sun { transform: scale(.7); transform-origin: top right; }
 }
 
 @keyframes pixelBlink { 0%, 45% { opacity: 1; transform: scale(1); } 50%, 100% { opacity: .15; transform: scale(.5); } }

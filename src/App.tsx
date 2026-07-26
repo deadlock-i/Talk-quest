@@ -8,6 +8,7 @@ import Vocabulary from "@/pages/Vocabulary";
 import Achievements from "@/pages/Achievements";
 import TeamSetup from "@/pages/TeamSetup";
 import LanguageToggle from "@/components/LanguageToggle";
+import PixelSideDecor from "@/components/PixelSideDecor";
 
 const pageVariants = {
   initial: { opacity: 0, scale: 0.98 },
@@ -38,14 +39,22 @@ export default function App() {
   return (
     <Router>
       <div className="pixel-world-decor" aria-hidden="true">
+        <div className="pixel-sun" />
         <div className="pixel-cloud pixel-cloud-left" />
         <div className="pixel-cloud pixel-cloud-right" />
+        <div className="pixel-hill pixel-hill-left"><span /><span /><span /></div>
+        <div className="pixel-hill pixel-hill-right"><span /><span /><span /></div>
+        <div className="pixel-bush pixel-bush-left" />
+        <div className="pixel-bush pixel-bush-right" />
+        <div className="pixel-bricks"><i /><i className="pixel-question-block">?</i><i /></div>
+        <div className="pixel-pipe"><span /></div>
         <div className="pixel-hearts"><span>♥</span><span>♥</span><span>♥</span></div>
         <div className="pixel-spark pixel-spark-one" />
         <div className="pixel-spark pixel-spark-two" />
         <div className="pixel-spark pixel-spark-three" />
         <div className="pixel-ground" />
       </div>
+      <PixelSideDecor />
       <LanguageToggle />
       <AnimatedRoutes />
     </Router>
